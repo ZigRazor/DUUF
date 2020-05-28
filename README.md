@@ -1,37 +1,42 @@
-## Welcome to GitHub Pages
+# DUUF
 
-You can use the [editor on GitHub](https://github.com/ZigRazor/DUUF/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+**Distributed Unified Utilities Framework**
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Project
 
-### Markdown
+The **D**istributed **U**nified **U**tilities **F**ramework is a collection of **C++** utilities libraries to execute common tasks in an easy and reliable way. 
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+It provides a simple interface to the common action applied in a distributed environment and integrates inside also complex algorith for distributed system.
 
-```markdown
-Syntax highlighted code block
+## Goal
 
-# Header 1
-## Header 2
-### Header 3
+The main goal of this project is to provide a usefull libraries that are easily integrated.
 
-- Bulleted
-- List
+## Contribute
 
-1. Numbered
-2. List
+Contribute to this project is easy, and there are different category.
 
-**Bold** and _Italic_ and `Code` text
+**Project Developer**
 
-[Link](url) and ![Image](src)
-```
+As Project Developer you can contribute by:
+- Developing new feature requested in the [Project Cards](https://github.com/ZigRazor/DUUF/projects/1)
+- Developing new test for the feature already developed
+- Analyzing the [issues](https://github.com/ZigRazor/DUUF/issues) reported by the user
+- Solving the known bugs
+- Suggesting new feature to add
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+**User Developer**
 
-### Jekyll Themes
+As User Developer you can contribute by:
+- Opening [issues](https://github.com/ZigRazor/DUUF/issues) when you find a bug or a problem
+- Suggesting new feature to add
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ZigRazor/DUUF/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## Note
 
-### Support or Contact
+This project is in development phase.
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Any suggestions are welcome.
+
+## Support and Contacts
+
+To send suggestions or if you want to partecipate actively to the project you can send an email to **zigrazor@gmail.com**.
