@@ -14,12 +14,22 @@
 #ifndef SERIALIZABLE_H
 #define SERIALIZABLE_H
 
+#include <iostream>
+
+namespace DUUF {
+namespace COMF {
+
 class Serializable {
 public:
-    virtual unsigned int serialize() = 0;
-    virtual unsigned int deserialize() = 0;
+    virtual unsigned int serialize( std::ostream& dest ) = 0;
+    virtual unsigned int deserialize( std::istream& source ) = 0;
+
+    virtual ~Serializable() = 0;
 
 };
+
+}
+}
 
 #endif /* SERIALIZABLE_H */
 

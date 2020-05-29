@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   UdpMessageQueue.h
  * Author: matteo.botticci
  *
@@ -14,14 +14,22 @@
 #ifndef UDP_MESSAGE_QUEUE_H
 #define UDP_MESSAGE_QUEUE_H
 
+namespace DUUF {
+namespace COMF {
+namespace UDP {
+
 class UdpMessageQueue {
 public:
     UdpMessageQueue();
-    UdpMessageQueue(const UdpMessageQueue& orig);
+    UdpMessageQueue( const UdpMessageQueue& orig );
     virtual ~UdpMessageQueue();
 private:
-    
+
 };
+
+}
+}
+}
 
 #endif /* UDP_MESSAGE_QUEUE_H */
 
