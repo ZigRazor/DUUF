@@ -79,7 +79,7 @@ unsigned int Serialization::serialize( const std::string& source, std::ostream& 
     return sizeof(stringLen) + stringLen;
 }
 
-unsigned int Serialization::serialize( const char*& source, unsigned int sizeOfSource, std::ostream& dest ) {
+unsigned int Serialization::serialize( const char* source, unsigned int sizeOfSource, std::ostream& dest ) {
     dest.write(reinterpret_cast<const char*>(&sizeOfSource), sizeof(sizeOfSource));
     dest.write(source, sizeOfSource);
     return sizeof(sizeOfSource) + sizeOfSource;

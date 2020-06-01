@@ -35,7 +35,7 @@ public:
     static unsigned int serialize( const double& source, std::ostream& dest );
     static unsigned int serialize( const bool& source, std::ostream& dest );
     static unsigned int serialize( const std::string& source, std::ostream& dest );
-    static unsigned int serialize( const char*& source, unsigned int sizeOfSource, std::ostream& dest );
+    static unsigned int serialize( const char* source, unsigned int sizeOfSource, std::ostream& dest );
     static unsigned int serialize( const Serializable& source, std::ostream& dest );
 
     static unsigned int deserialize( std::istream& source, int& dest );
