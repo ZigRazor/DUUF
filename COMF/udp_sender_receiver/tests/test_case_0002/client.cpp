@@ -12,7 +12,8 @@
  */
 
 #include <cstdlib>
-#include "UdpClient.h"
+
+#include "../../UdpReceiver.h"
 
 using namespace std;
 
@@ -21,9 +22,9 @@ using namespace std;
  */
 int main( int argc, char** argv ) {
 
-    DUUF::COMF::UDP::UdpClient clientUDP("127.0.0.1", 20000);
+    DUUF::COMF::UDP::UdpReceiver clientUDP("127.0.0.1", 20000);
 
-    string message = "test_case_0001";
+    string message = "test_case_0002";
 
     clientUDP.send(message.c_str(), message.length());
 

@@ -5,15 +5,15 @@
  */
 
 /*
- * File:   server.cpp
+ * File:   client.cpp
  * Author: matteo.botticci
  *
- * Created on 11 maggio 2020, 16.18
+ * Created on 11 maggio 2020, 16.19
  */
 
 #include <cstdlib>
-#include <iostream>
-#include "UdpServer.h"
+
+#include "../../UdpReceiver.h"
 
 using namespace std;
 
@@ -22,15 +22,11 @@ using namespace std;
  */
 int main( int argc, char** argv ) {
 
-    DUUF::COMF::UDP::UdpServer serverUDP("127.0.0.1", 20000);
+    DUUF::COMF::UDP::UdpReceiver clientUDP("127.0.0.1", 20000);
 
-    unsigned int max_length = 256;
+    string message = "test_case_0001";
 
-    char message[max_length];
-
-    serverUDP.recv(message, max_length);
-
-    cout << "Message Received: " << message << endl;
+    clientUDP.send(message.c_str(), message.length());
 
     return 0;
 }

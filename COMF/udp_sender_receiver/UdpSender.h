@@ -5,7 +5,7 @@
  */
 
 /*
- * File:   UdpServer.h
+ * File:   UdpSender.h
  * Author: matteo.botticci
  *
  * Created on 11 maggio 2020, 10.52
@@ -20,16 +20,16 @@ namespace DUUF {
 namespace COMF {
 namespace UDP {
 
-class UdpServer: public UdpBase {
+class UdpSender: public UdpBase {
 public:
-    UdpServer( std::string const& addr, const int& port, const int& family = AF_UNSPEC, std::string const* multicast_addr = nullptr );
-    virtual ~UdpServer() = default;
+    UdpSender( std::string const& addr, const int& port, const int& family = AF_UNSPEC, std::string const* multicast_addr = nullptr );
+    virtual ~UdpSender() = default;
 
     size_t recv( char* msg, size_t max_size ) const;
     size_t timed_recv( char* msg, size_t const max_size, int const max_wait_ms ) const;
     std::string timed_recv( int const bufsize, int const max_wait_ms ) const;
 private:
-    UdpServer( const UdpServer& orig ) = delete;
+    UdpSender( const UdpSender& orig ) = delete;
 };
 
 }

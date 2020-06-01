@@ -5,7 +5,7 @@
  */
 
 /*
- * File:   UdpClient.h
+ * File:   UdpReceiver.h
  * Author: matteo.botticci
  *
  * Created on 11 maggio 2020, 10.50
@@ -20,16 +20,16 @@ namespace DUUF {
 namespace COMF {
 namespace UDP {
 
-class UdpClient: public UdpBase {
+class UdpReceiver: public UdpBase {
 public:
-    UdpClient( std::string const& addr, const int& port, const int& family = AF_UNSPEC );
+    UdpReceiver( std::string const& addr, const int& port, const int& family = AF_UNSPEC );
 
-    virtual ~UdpClient() = default;
+    virtual ~UdpReceiver() = default;
 
     size_t send( const char* msg, size_t size ) const;
 private:
 
-    UdpClient( const UdpClient& orig ) = delete;
+    UdpReceiver( const UdpReceiver& orig ) = delete;
 };
 
 }

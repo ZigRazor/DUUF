@@ -5,7 +5,7 @@
  */
 
 /*
- * File:   UdpServer.cpp
+ * File:   UdpSender.cpp
  * Author: matteo.botticci
  *
  * Created on 11 maggio 2020, 10.52
@@ -18,13 +18,13 @@
 #include <string.h>
 #include <sstream>
 
-#include "UdpServer.h"
+#include "UdpSender.h"
 
 namespace DUUF {
 namespace COMF {
 namespace UDP {
 
-UdpServer::UdpServer( std::string const& addr, const int& port, const int& family, std::string const* multicast_addr ) :
+UdpSender::UdpSender( std::string const& addr, const int& port, const int& family, std::string const* multicast_addr ) :
         UdpBase(addr, port, family) {
     int r = bind(l_udp_socket, l_udp_addrinfo->ai_addr, l_udp_addrinfo->ai_addrlen);
     if ( r != 0 ) {
@@ -90,11 +90,11 @@ UdpServer::UdpServer( std::string const& addr, const int& port, const int& famil
 
 }
 
-size_t UdpServer::recv( char* msg, size_t max_size ) const {
+size_t UdpSender::recv( char* msg, size_t max_size ) const {
     return ::recv(l_udp_socket, msg, max_size, 0);
 }
 
-size_t UdpServer::timed_recv( char* msg, size_t const max_size, int const max_wait_ms ) const {
+size_t UdpSender::timed_recv( char* msg, size_t const max_size, int const max_wait_ms ) const {
     struct pollfd fd;
     fd.events = POLLIN | POLLPRI | POLLRDHUP;
     fd.fd = l_udp_socket;
@@ -112,7 +112,7 @@ size_t UdpServer::timed_recv( char* msg, size_t const max_size, int const max_wa
     return -1;
 }
 
-std::string UdpServer::timed_recv( int const bufsize, int const max_wait_ms ) const {
+std::string UdpSender::timed_recv( int const bufsize, int const max_wait_ms ) const {
     std::vector<char> buf;
     buf.resize(bufsize + 1, '\0');
     int const r(timed_recv(&buf[0], bufsize, max_wait_ms));

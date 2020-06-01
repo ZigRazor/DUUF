@@ -13,7 +13,8 @@
 
 #include <cstdlib>
 #include <iostream>
-#include "UdpServer.h"
+
+#include "../../../udp_sender_receiver/UdpSender.h"
 
 using namespace std;
 
@@ -22,7 +23,7 @@ using namespace std;
  */
 int main( int argc, char** argv ) {
 
-    DUUF::COMF::UDP::UdpServer serverUDP("127.0.0.1", 20000);
+    DUUF::COMF::UDP::UdpSender serverUDP("127.0.0.1", 20000);
 
     unsigned int max_length = 256;
 

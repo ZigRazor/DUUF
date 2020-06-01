@@ -9,5 +9,5 @@ set(CMAKE_CXX_FLAGS "-std=c++11" ${CMAKE_CXX_FLAGS})
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 
-add_library(udp SHARED UdpBase.cpp UdpClient.cpp UdpServer.cpp)
+add_library(udp SHARED UdpBase.cpp UdpSender.cpp UdpReceiver.cpp)
 #target_include_directories(master_election PUBLIC /home/matteo.botticci/SCM/prove_varie)
