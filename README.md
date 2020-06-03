@@ -1,5 +1,7 @@
 # DUUF
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/81be8003cd0a44cc8b14dc4f02d796f2)](https://app.codacy.com/manual/matteobotticci/DUUF?utm_source=github.com&utm_medium=referral&utm_content=ZigRazor/DUUF&utm_campaign=Badge_Grade_Settings)
+
 **Distributed Unified Utilities Framework**
 
 ## Project
