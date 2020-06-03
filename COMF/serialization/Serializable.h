@@ -22,9 +22,9 @@ namespace COMF {
 class Serializable {
 public:
     virtual unsigned int serialize( std::ostream& dest ) const = 0;
-    virtual unsigned int deserialize( std::istream& source ) const = 0;
+    virtual unsigned int deserialize( std::istream& source ) = 0;
 
-    virtual ~Serializable() = 0;
+    virtual ~Serializable() = default;
 
 };
 

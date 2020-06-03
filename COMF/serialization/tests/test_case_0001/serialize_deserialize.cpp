@@ -21,35 +21,10 @@ using namespace std;
 /*
  *
  */
-int main( int argc, char** argv ) {
 
+void test_int() {
     int a = -12345;
     int a_result = 0;
-    unsigned int b = 12345;
-    unsigned int b_result = 0;
-    short c = -128;
-    short c_result = 0;
-    unsigned short d = 453;
-    unsigned short d_result = 0;
-    long e = -12345;
-    long e_result = 0;
-    unsigned long f = 12345;
-    unsigned long f_result = 0;
-    char g = -25;
-    char g_result = 0;
-    unsigned char h = 68;
-    unsigned char h_result = 0;
-    float i = 6.857;
-    float i_result = 0.0;
-    double l = 78.445184;
-    double l_result = 0.0;
-    bool m = true;
-    bool m_result = false;
-    string n = "test_case_0001 string";
-    string n_result = "";
-    char o[21] = "test_case_0001 char*";
-    char o_result[21] = "";
-
     stringstream my_stream;
     unsigned int size_serialized = 0;
     unsigned int size_deserialized = 0;
@@ -68,15 +43,20 @@ int main( int argc, char** argv ) {
     } else {
         cout << "int  ERROR " << endl;
     }
+}
 
-    my_stream.str(string());
-    my_stream.clear();
+void test_unsigned_int() {
+    unsigned int b = 12345;
+    unsigned int b_result = 0;
+    stringstream my_stream;
+    unsigned int size_serialized = 0;
+    unsigned int size_deserialized = 0;
 
     size_serialized = DUUF::COMF::Serialization::serialize(b, my_stream);
     if ( size_serialized != sizeof(unsigned int) ) {
         cout << "unsigned int serialization size ERROR " << endl;
     }
-    size_deserialized = DUUF::COMF::Serialization::deserialize(my_stream, a_result);
+    size_deserialized = DUUF::COMF::Serialization::deserialize(my_stream, b_result);
     if ( size_deserialized != sizeof(unsigned int) ) {
         cout << "unsigned int deserialization size ERROR " << endl;
     }
@@ -86,8 +66,14 @@ int main( int argc, char** argv ) {
     } else {
         cout << "unsigned int  ERROR " << endl;
     }
-    my_stream.str(string());
-    my_stream.clear();
+}
+
+void test_short() {
+    short c = -128;
+    short c_result = 0;
+    stringstream my_stream;
+    unsigned int size_serialized = 0;
+    unsigned int size_deserialized = 0;
 
     size_serialized = DUUF::COMF::Serialization::serialize(c, my_stream);
     if ( size_serialized != sizeof(short) ) {
@@ -103,8 +89,14 @@ int main( int argc, char** argv ) {
     } else {
         cout << "short   ERROR " << endl;
     }
-    my_stream.str(string());
-    my_stream.clear();
+}
+
+void test_unsigned_short() {
+    unsigned short d = 453;
+    unsigned short d_result = 0;
+    stringstream my_stream;
+    unsigned int size_serialized = 0;
+    unsigned int size_deserialized = 0;
 
     size_serialized = DUUF::COMF::Serialization::serialize(d, my_stream);
     if ( size_serialized != sizeof(unsigned short) ) {
@@ -120,8 +112,14 @@ int main( int argc, char** argv ) {
     } else {
         cout << "unsigned short   ERROR " << endl;
     }
-    my_stream.str(string());
-    my_stream.clear();
+}
+
+void test_long() {
+    long e = -12345;
+    long e_result = 0;
+    stringstream my_stream;
+    unsigned int size_serialized = 0;
+    unsigned int size_deserialized = 0;
 
     size_serialized = DUUF::COMF::Serialization::serialize(e, my_stream);
     if ( size_serialized != sizeof(long) ) {
@@ -137,8 +135,14 @@ int main( int argc, char** argv ) {
     } else {
         cout << "long   ERROR " << endl;
     }
-    my_stream.str(string());
-    my_stream.clear();
+}
+
+void test_unsigned_long() {
+    unsigned long f = 12345;
+    unsigned long f_result = 0;
+    stringstream my_stream;
+    unsigned int size_serialized = 0;
+    unsigned int size_deserialized = 0;
 
     size_serialized = DUUF::COMF::Serialization::serialize(f, my_stream);
     if ( size_serialized != sizeof(unsigned long) ) {
@@ -154,42 +158,14 @@ int main( int argc, char** argv ) {
     } else {
         cout << "unsigned long   ERROR " << endl;
     }
-    my_stream.str(string());
-    my_stream.clear();
+}
 
-    size_serialized = DUUF::COMF::Serialization::serialize(g, my_stream);
-    if ( size_serialized != sizeof(char) ) {
-        cout << "char  serialization size ERROR " << endl;
-    }
-    size_deserialized = DUUF::COMF::Serialization::deserialize(my_stream, g_result);
-    if ( size_deserialized != sizeof(char) ) {
-        cout << "char  deserialization size ERROR " << endl;
-    }
-
-    if ( g_result == g ) {
-        cout << "char   PASSED " << endl;
-    } else {
-        cout << "char   ERROR " << endl;
-    }
-    my_stream.str(string());
-    my_stream.clear();
-
-    size_serialized = DUUF::COMF::Serialization::serialize(h, my_stream);
-    if ( size_serialized != sizeof(unsigned char) ) {
-        cout << "unsigned char  serialization size ERROR " << endl;
-    }
-    size_deserialized = DUUF::COMF::Serialization::deserialize(my_stream, h_result);
-    if ( size_deserialized != sizeof(unsigned char) ) {
-        cout << "unsigned char  deserialization size ERROR " << endl;
-    }
-
-    if ( h_result == h ) {
-        cout << "unsigned char   PASSED " << endl;
-    } else {
-        cout << "unsigned char   ERROR " << endl;
-    }
-    my_stream.str(string());
-    my_stream.clear();
+void test_float() {
+    float i = 6.857;
+    float i_result = 0.0;
+    stringstream my_stream;
+    unsigned int size_serialized = 0;
+    unsigned int size_deserialized = 0;
 
     size_serialized = DUUF::COMF::Serialization::serialize(i, my_stream);
     if ( size_serialized != sizeof(float) ) {
@@ -205,8 +181,14 @@ int main( int argc, char** argv ) {
     } else {
         cout << "float   ERROR " << endl;
     }
-    my_stream.str(string());
-    my_stream.clear();
+}
+
+void test_double() {
+    double l = 78.445184;
+    double l_result = 0.0;
+    stringstream my_stream;
+    unsigned int size_serialized = 0;
+    unsigned int size_deserialized = 0;
 
     size_serialized = DUUF::COMF::Serialization::serialize(l, my_stream);
     if ( size_serialized != sizeof(double) ) {
@@ -222,8 +204,60 @@ int main( int argc, char** argv ) {
     } else {
         cout << "double   ERROR " << endl;
     }
-    my_stream.str(string());
-    my_stream.clear();
+}
+
+void test_char() {
+    char g = -25;
+    char g_result = 0;
+    stringstream my_stream;
+    unsigned int size_serialized = 0;
+    unsigned int size_deserialized = 0;
+
+    size_serialized = DUUF::COMF::Serialization::serialize(g, my_stream);
+    if ( size_serialized != sizeof(char) ) {
+        cout << "char  serialization size ERROR " << endl;
+    }
+    size_deserialized = DUUF::COMF::Serialization::deserialize(my_stream, g_result);
+    if ( size_deserialized != sizeof(char) ) {
+        cout << "char  deserialization size ERROR " << endl;
+    }
+
+    if ( g_result == g ) {
+        cout << "char   PASSED " << endl;
+    } else {
+        cout << "char   ERROR " << endl;
+    }
+}
+
+void test_unsigned_char() {
+    unsigned char h = 68;
+    unsigned char h_result = 0;
+    stringstream my_stream;
+    unsigned int size_serialized = 0;
+    unsigned int size_deserialized = 0;
+
+    size_serialized = DUUF::COMF::Serialization::serialize(h, my_stream);
+    if ( size_serialized != sizeof(unsigned char) ) {
+        cout << "unsigned char  serialization size ERROR " << endl;
+    }
+    size_deserialized = DUUF::COMF::Serialization::deserialize(my_stream, h_result);
+    if ( size_deserialized != sizeof(unsigned char) ) {
+        cout << "unsigned char  deserialization size ERROR " << endl;
+    }
+
+    if ( h_result == h ) {
+        cout << "unsigned char   PASSED " << endl;
+    } else {
+        cout << "unsigned char   ERROR " << endl;
+    }
+}
+
+void test_bool() {
+    bool m = true;
+    bool m_result = false;
+    stringstream my_stream;
+    unsigned int size_serialized = 0;
+    unsigned int size_deserialized = 0;
 
     size_serialized = DUUF::COMF::Serialization::serialize(m, my_stream);
     if ( size_serialized != sizeof(bool) ) {
@@ -239,8 +273,14 @@ int main( int argc, char** argv ) {
     } else {
         cout << "bool   ERROR " << endl;
     }
-    my_stream.str(string());
-    my_stream.clear();
+}
+
+void test_string() {
+    string n = "test_case_0001 string";
+    string n_result = "";
+    stringstream my_stream;
+    unsigned int size_serialized = 0;
+    unsigned int size_deserialized = 0;
 
     size_serialized = DUUF::COMF::Serialization::serialize(n, my_stream);
     if ( size_serialized != n.length() + sizeof(unsigned int) ) {
@@ -256,8 +296,14 @@ int main( int argc, char** argv ) {
     } else {
         cout << "string   ERROR " << endl;
     }
-    my_stream.str(string());
-    my_stream.clear();
+}
+
+void test_char_star() {
+    char o[21] = "test_case_0001 char*";
+    char o_result[21] = "";
+    stringstream my_stream;
+    unsigned int size_serialized = 0;
+    unsigned int size_deserialized = 0;
 
     size_serialized = DUUF::COMF::Serialization::serialize(o, 21, my_stream);
     if ( size_serialized != 21 + sizeof(unsigned int) ) {
@@ -273,9 +319,22 @@ int main( int argc, char** argv ) {
     } else {
         cout << "char*   ERROR " << endl;
     }
-    my_stream.str(string());
-    my_stream.clear();
+}
+
+int main( int argc, char** argv ) {
+
+    test_int();
+    test_unsigned_int();
+    test_short();
+    test_unsigned_short();
+    test_long();
+    test_unsigned_long();
+    test_char();
+    test_unsigned_char();
+    test_float();
+    test_double();
+    test_string();
+    test_char_star();
 
     return 0;
 }
-
