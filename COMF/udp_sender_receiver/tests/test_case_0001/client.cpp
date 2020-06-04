@@ -13,7 +13,7 @@
 
 #include <cstdlib>
 
-#include "../../UdpReceiver.h"
+#include "../../UdpSender.h"
 
 using namespace std;
 
@@ -22,7 +22,7 @@ using namespace std;
  */
 int main( int argc, char** argv ) {
 
-    DUUF::COMF::UDP::UdpReceiver clientUDP("127.0.0.1", 20000);
+    DUUF::COMF::UDP::UdpSender clientUDP("127.0.0.1", 20000);
 
     string message = "test_case_0001";
 

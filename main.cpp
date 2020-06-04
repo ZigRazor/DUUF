@@ -13,7 +13,8 @@
 
 #include <cstdlib>
 #include <iostream>
-#include "COMF/udp_sender_receiver/UdpReceiver.h"
+
+#include "COMF/udp_sender_receiver/UdpSender.h"
 
 using namespace std;
 
@@ -24,7 +25,7 @@ int main( int argc, char** argv ) {
 
     std::cout << "prova main 1" << std::endl;
 
-    DUUF::COMF::UDP::UdpReceiver pippo("10.180.96.238", 1400);
+    DUUF::COMF::UDP::UdpSender pippo("10.180.96.238", 1400);
 
     std::cout << "fine prova main 1" << std::endl;
     return 0;

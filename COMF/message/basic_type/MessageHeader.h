@@ -16,12 +16,21 @@
 
 #include <chrono>
 #include <string>
+#include "Serializable.h"
 
-class MessageHeader {
+namespace DUUF {
+namespace COMF {
+namespace MESSAGE {
+namespace BASICTYPE {
+
+class MessageHeader: public DUUF::COMF::Serializable {
 public:
     MessageHeader();
-    MessageHeader( const MessageHeader& orig );
+    MessageHeader( const MessageHeader& orig ) = default;
     virtual ~MessageHeader();
+
+    unsigned int deserialize( std::istream& source ) override;
+    unsigned int serialize( std::ostream& dest ) const override;
 
     void SetDataSize( unsigned int dataSize );
     unsigned int GetDataSize() const;
@@ -38,6 +47,11 @@ private:
     unsigned int dataSize;
 
 };
+
+}
+}
+}
+}
 
 #endif /* MESSAGE_HEADER_H */
 

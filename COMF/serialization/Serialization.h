@@ -53,6 +53,9 @@ public:
     static unsigned int deserialize( std::istream& source, unsigned int sizeOfDestination, char* dest );
     static unsigned int deserialize( std::istream& source, Serializable& dest );
 
+    static int streambufToCharBuf( std::stringstream& streamBuf, char* charBuf, unsigned int sizeOfCharBuffer );
+    static int charBufToStreamBuf( const char* charBuf, std::stringstream& streamBuf, unsigned int sizeOfCharBuffer );
+
 private:
     Serialization() = delete;
     Serialization( const Serialization& orig ) = delete;

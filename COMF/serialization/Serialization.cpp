@@ -13,6 +13,8 @@
 
 #include "Serialization.h"
 #include <cstring>
+#include <string.h>
+#include <sstream>
 
 namespace DUUF {
 namespace COMF {
@@ -147,8 +149,9 @@ unsigned int Serialization::deserialize( std::istream& source, bool& dest ) {
 unsigned int Serialization::deserialize( std::istream& source, std::string& dest ) {
     unsigned int stringlen = 0;
     source.read(reinterpret_cast<char*>(&stringlen), sizeof(stringlen));
-    char dest_c[stringlen];
+    char dest_c[stringlen + 1];
     source.read(dest_c, stringlen);
+    dest_c[stringlen] = '\0';
     dest = dest_c;
     return sizeof(stringlen) + stringlen;
 }
@@ -168,6 +171,21 @@ unsigned int Serialization::deserialize( std::istream& source, unsigned int size
 
 unsigned int Serialization::deserialize( std::istream& source, Serializable& dest ) {
     return dest.deserialize(source);
+}
+
+int Serialization::streambufToCharBuf( std::stringstream& streamBuf, char* charBuf, unsigned int sizeOfCharBuffer ) {
+    unsigned int streamLength = streamBuf.str().length();
+    if ( streamLength > sizeOfCharBuffer ) {
+        return -1;
+    } else {
+        memcpy(charBuf, streamBuf.str().c_str(), streamLength);
+    }
+    return 0;
+}
+
+int Serialization::charBufToStreamBuf( const char* charBuf, std::stringstream& streamBuf, unsigned int sizeOfCharBuffer ) {
+    streamBuf.write(charBuf, sizeOfCharBuffer);
+    return 0;
 }
 
 }

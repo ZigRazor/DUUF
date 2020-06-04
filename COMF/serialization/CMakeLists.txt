@@ -1,6 +1,3 @@
-cmake_minimum_required(VERSION 2.8)
-
-#set the project name
 add_subdirectory(tests)
 
 #specify the C++ Standard

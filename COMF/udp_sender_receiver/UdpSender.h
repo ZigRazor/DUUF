@@ -5,14 +5,14 @@
  */
 
 /*
- * File:   UdpSender.h
+ * File:   UdpReceiver.h
  * Author: matteo.botticci
  *
- * Created on 11 maggio 2020, 10.52
+ * Created on 11 maggio 2020, 10.50
  */
 
-#ifndef UDP_SERVER_H
-#define UDP_SERVER_H
+#ifndef UDP_CLIENT_H
+#define UDP_CLIENT_H
 
 #include "UdpBase.h"
 
@@ -22,13 +22,13 @@ namespace UDP {
 
 class UdpSender: public UdpBase {
 public:
-    UdpSender( std::string const& addr, const int& port, const int& family = AF_UNSPEC, std::string const* multicast_addr = nullptr );
+    UdpSender( std::string const& addr, const int& port, const int& family = AF_UNSPEC );
+
     virtual ~UdpSender() = default;
 
-    size_t recv( char* msg, size_t max_size ) const;
-    size_t timed_recv( char* msg, size_t const max_size, int const max_wait_ms ) const;
-    std::string timed_recv( int const bufsize, int const max_wait_ms ) const;
+    size_t send( const char* msg, size_t size ) const;
 private:
+
     UdpSender( const UdpSender& orig ) = delete;
 };
 
@@ -36,5 +36,5 @@ private:
 }
 }
 
-#endif /* UDP_SERVER_H */
+#endif /* UDP_CLIENT_H */
 

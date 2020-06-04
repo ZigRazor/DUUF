@@ -15,21 +15,32 @@
 #define BASE_MESSAGE_H
 #include "basic_type/MessageHeader.h"
 
-class BaseMessage {
+namespace DUUF {
+namespace COMF {
+namespace MESSAGE {
+
+class BaseMessage: public DUUF::COMF::Serializable {
 public:
     BaseMessage();
     BaseMessage( const BaseMessage& orig );
     virtual ~BaseMessage();
-    void SetData( char* data );
+    void SetData( const char* data, unsigned int dataSize );
     char* GetData() const;
-    void SetHeader( MessageHeader header );
-    MessageHeader GetHeader() const;
+    void SetHeader( BASICTYPE::MessageHeader& header );
+    BASICTYPE::MessageHeader& GetHeader();
+    virtual unsigned int deserialize( std::istream& source ) override;
+    virtual unsigned int serialize( std::ostream& dest ) const override;
+
 private:
 
-    MessageHeader header;
+    BASICTYPE::MessageHeader header;
     char* data;
 
 };
+
+}
+}
+}
 
 #endif /* BASE_MESSAGE_H */
 
