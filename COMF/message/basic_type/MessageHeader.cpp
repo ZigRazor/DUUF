@@ -19,12 +19,10 @@ namespace COMF {
 namespace MESSAGE {
 namespace BASICTYPE {
 
-MessageHeader::MessageHeader() {
-    addr = "";
+MessageHeader::MessageHeader() :
+        addr(""), usecTimestamp(std::chrono::microseconds(0)) {
     port = 0;
-    usecTimestamp = std::chrono::microseconds(0);
     dataSize = 0;
-
 }
 
 MessageHeader::~MessageHeader() {
@@ -38,7 +36,7 @@ unsigned int MessageHeader::GetDataSize() const {
     return dataSize;
 }
 
-void MessageHeader::SetUsecTimestamp( std::chrono::microseconds usecTimestamp ) {
+void MessageHeader::SetUsecTimestamp( const std::chrono::microseconds& usecTimestamp ) {
     this->usecTimestamp = usecTimestamp;
 }
 
@@ -54,7 +52,7 @@ int MessageHeader::GetPort() const {
     return port;
 }
 
-void MessageHeader::SetAddr( std::string addr ) {
+void MessageHeader::SetAddr( const std::string& addr ) {
     this->addr = addr;
 }
 

@@ -34,11 +34,11 @@ public:
 
     void SetDataSize( unsigned int dataSize );
     unsigned int GetDataSize() const;
-    void SetUsecTimestamp( std::chrono::microseconds usecTimestamp );
+    void SetUsecTimestamp( const std::chrono::microseconds& usecTimestamp );
     std::chrono::microseconds GetUsecTimestamp() const;
     void SetPort( int port );
     int GetPort() const;
-    void SetAddr( std::string addr );
+    void SetAddr( const std::string& addr );
     std::string GetAddr() const;
 private:
     std::string addr;

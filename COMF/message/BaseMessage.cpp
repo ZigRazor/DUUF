@@ -26,7 +26,7 @@ BaseMessage::BaseMessage() :
 
 BaseMessage::BaseMessage( const BaseMessage& orig ) {
     if ( data ) {
-        delete data;
+        delete[] data;
     }
     data = new char[orig.header.GetDataSize()];
     memcpy(data, orig.data, orig.header.GetDataSize());
@@ -34,13 +34,13 @@ BaseMessage::BaseMessage( const BaseMessage& orig ) {
 
 BaseMessage::~BaseMessage() {
     if ( data ) {
-        delete data;
+        delete[] data;
     }
 }
 
 void BaseMessage::SetData( const char* data, unsigned int dataSize ) {
     if ( this->data ) {
-        delete this->data;
+        delete[] this->data;
     }
     this->data = new char[dataSize];
     memcpy(this->data, data, dataSize);
@@ -63,7 +63,7 @@ unsigned int BaseMessage::deserialize( std::istream& source ) {
     unsigned int byteDeserialized = 0;
     byteDeserialized += DUUF::COMF::Serialization::deserialize(source, header);
     if ( data ) {
-        delete data;
+        delete[] data;
     }
     data = new char[header.GetDataSize()];
     byteDeserialized += DUUF::COMF::Serialization::deserialize(source, header.GetDataSize(), data);

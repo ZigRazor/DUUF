@@ -8,11 +8,11 @@
 #include "TestClass.h"
 #include "../../Serialization.h"
 
-Test_Class::Test_Class() {
+Test_Class::Test_Class() :
+        d("") {
     a = 0;
     b = 0;
     c = 0.0;
-    d = "";
     e = 0;
 }
 
