@@ -20,7 +20,7 @@ UdpCustomer::~UdpCustomer() {
 }
 
 int UdpCustomer::openConnection( const std::string& name, const Send_Receive_Mode_Enum& mode, const std::string& addr, const int& port, const int& family ) {
-    if ( connections.find(name) != connections.end() ) {
+    if ( isConnectionOpen(name) ) {
         //connection name already used
         return -1;
     } else {
@@ -32,21 +32,22 @@ int UdpCustomer::openConnection( const std::string& name, const Send_Receive_Mod
 
 int UdpCustomer::closeConnection( const std::string& name ) {
     std::map<std::string, UdpConnection>::iterator connectionsIt = connections.find(name);
-    if ( connectionsIt == connections.end() ) {
+    if ( !isConnectionOpen(name) ) {
         //no connection open with this name
         return -1;
     } else {
+        std::map<std::string, UdpConnection>::iterator connectionsIt = connections.find(name);
         connections.erase(connectionsIt);
     }
     return 0;
 }
 
 int UdpCustomer::enableConnectionSend( const std::string& name ) {
-    std::map<std::string, UdpConnection>::iterator connectionsIt = connections.find(name);
-    if ( connectionsIt == connections.end() ) {
+    if ( !isConnectionOpen(name) ) {
         //no connection open with this name
         return -1;
     } else {
+        std::map<std::string, UdpConnection>::iterator connectionsIt = connections.find(name);
         if ( connectionsIt->second.enableSend() == -1 ) {
             //connection already open in send mode
             return -2;
@@ -56,17 +57,27 @@ int UdpCustomer::enableConnectionSend( const std::string& name ) {
 }
 
 int UdpCustomer::enableConnectionReceive( const std::string& name ) {
-    std::map<std::string, UdpConnection>::iterator connectionsIt = connections.find(name);
-    if ( connectionsIt == connections.end() ) {
+    if ( !isConnectionOpen(name) ) {
         //no connection open with this name
         return -1;
     } else {
+        std::map<std::string, UdpConnection>::iterator connectionsIt = connections.find(name);
         if ( connectionsIt->second.enableReceive() == -1 ) {
             //connection already open in receive mode
             return -2;
         }
     }
     return 0;
+}
+
+bool UdpCustomer::isConnectionOpen( const std::string& name ) {
+    std::map<std::string, UdpConnection>::iterator connectionsIt = connections.find(name);
+    if ( connectionsIt == connections.end() ) {
+        //no connection open with this name
+        return false;
+    }
+    return true;
+
 }
 
 } /* namespace UDP */

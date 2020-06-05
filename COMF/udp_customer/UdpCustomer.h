@@ -30,6 +30,9 @@ public:
     int enableConnectionSend( const std::string& name );
     int enableConnectionReceive( const std::string& name );
 private:
+
+    bool isConnectionOpen( const std::string& name );
+
     std::map<std::string, UdpConnection> connections;
 };
 

@@ -51,12 +51,8 @@ UdpConnection::~UdpConnection() {
     }
 }
 
-UdpConnection::UdpConnection( const UdpConnection& other ) {
-    name = other.name;
-    udp_addr = other.udp_addr;
-    port = other.port;
-    family = other.family;
-    mode = other.mode;
+UdpConnection::UdpConnection( const UdpConnection& other ) :
+        name(other.name), udp_addr(other.udp_addr), port(other.port), family(other.family), mode(other.mode) {
     receiver = new UdpReceiver(udp_addr, port, family);
     sender = new UdpSender(udp_addr, port, family);
 }

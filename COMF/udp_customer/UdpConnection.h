@@ -34,6 +34,7 @@ public:
     const std::string& getUdpAddr() const;
 
 private:
+
     std::string name;
     std::string udp_addr;
     int port;
