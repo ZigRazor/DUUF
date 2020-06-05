@@ -1,3 +1,12 @@
-add_subdirectory(test_case_0001)
-add_subdirectory(test_case_0002)
+#UDP Sender Receiver
+#test case 1
+add_executable(udp_client_server_test_0001_client test_case_0001/client.cpp)
+add_executable(udp_client_server_test_0001_server test_case_0001/server.cpp)
+target_link_libraries(udp_client_server_test_0001_client "udp")
+target_link_libraries(udp_client_server_test_0001_server "udp")
 
+#test case 2
+add_executable(udp_client_server_test_0002_client test_case_0002/client.cpp)
+add_executable(udp_client_server_test_0002_server test_case_0002/server.cpp)
+target_link_libraries(udp_client_server_test_0002_client "udp")
+target_link_libraries(udp_client_server_test_0002_server "udp")
