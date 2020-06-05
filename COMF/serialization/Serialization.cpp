@@ -93,64 +93,116 @@ unsigned int Serialization::serialize( const Serializable& source, std::ostream&
 
 unsigned int Serialization::deserialize( std::istream& source, int& dest ) {
     source.read(reinterpret_cast<char*>(&dest), sizeof(dest));
+    if ( !source ) {
+        //ERROR
+        return 0;
+    }
     return sizeof(dest);
 }
 
 unsigned int Serialization::deserialize( std::istream& source, unsigned int& dest ) {
     source.read(reinterpret_cast<char*>(&dest), sizeof(dest));
+    if ( !source ) {
+        //ERROR
+        return 0;
+    }
     return sizeof(dest);
 }
 
 unsigned int Serialization::deserialize( std::istream& source, short& dest ) {
     source.read(reinterpret_cast<char*>(&dest), sizeof(dest));
+    if ( !source ) {
+        //ERROR
+        return 0;
+    }
     return sizeof(dest);
 }
 
 unsigned int Serialization::deserialize( std::istream& source, unsigned short& dest ) {
     source.read(reinterpret_cast<char*>(&dest), sizeof(dest));
+    if ( !source ) {
+        //ERROR
+        return 0;
+    }
     return sizeof(dest);
 }
 
 unsigned int Serialization::deserialize( std::istream& source, long& dest ) {
     source.read(reinterpret_cast<char*>(&dest), sizeof(dest));
+    if ( !source ) {
+        //ERROR
+        return 0;
+    }
     return sizeof(dest);
 }
 
 unsigned int Serialization::deserialize( std::istream& source, unsigned long& dest ) {
     source.read(reinterpret_cast<char*>(&dest), sizeof(dest));
+    if ( !source ) {
+        //ERROR
+        return 0;
+    }
     return sizeof(dest);
 }
 
 unsigned int Serialization::deserialize( std::istream& source, char& dest ) {
     source.read(reinterpret_cast<char*>(&dest), sizeof(dest));
+    if ( !source ) {
+        //ERROR
+        return 0;
+    }
     return sizeof(dest);
 }
 
 unsigned int Serialization::deserialize( std::istream& source, unsigned char& dest ) {
     source.read(reinterpret_cast<char*>(&dest), sizeof(dest));
+    if ( !source ) {
+        //ERROR
+        return 0;
+    }
     return sizeof(dest);
 }
 
 unsigned int Serialization::deserialize( std::istream& source, float& dest ) {
     source.read(reinterpret_cast<char*>(&dest), sizeof(dest));
+    if ( !source ) {
+        //ERROR
+        return 0;
+    }
     return sizeof(dest);
 }
 
 unsigned int Serialization::deserialize( std::istream& source, double& dest ) {
     source.read(reinterpret_cast<char*>(&dest), sizeof(dest));
+    if ( !source ) {
+        //ERROR
+        return 0;
+    }
     return sizeof(dest);
 }
 
 unsigned int Serialization::deserialize( std::istream& source, bool& dest ) {
     source.read(reinterpret_cast<char*>(&dest), sizeof(dest));
+    if ( !source ) {
+        //ERROR
+        return 0;
+    }
     return sizeof(dest);
 }
 
 unsigned int Serialization::deserialize( std::istream& source, std::string& dest ) {
     unsigned int stringlen = 0;
     source.read(reinterpret_cast<char*>(&stringlen), sizeof(stringlen));
+    if ( !source ) {
+        //ERROR
+        return 0;
+    }
     char dest_c[stringlen + 1];
     source.read(dest_c, stringlen);
+    if ( !source ) {
+        //ERROR
+        return 0;
+    }
     dest_c[stringlen] = '\0';
     dest = dest_c;
     return sizeof(stringlen) + stringlen;
@@ -159,8 +211,16 @@ unsigned int Serialization::deserialize( std::istream& source, std::string& dest
 unsigned int Serialization::deserialize( std::istream& source, unsigned int sizeOfDestination, char* dest ) {
     unsigned int stringlen = 0;
     source.read(reinterpret_cast<char*>(&stringlen), sizeof(stringlen));
+    if ( !source ) {
+        //ERROR
+        return 0;
+    }
     char dest_c[stringlen];
     source.read(dest_c, stringlen);
+    if ( !source ) {
+        //ERROR
+        return 0;
+    }
     if ( stringlen <= sizeOfDestination ) {
         std::memcpy(dest, dest_c, stringlen);
     } else {
