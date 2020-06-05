@@ -23,7 +23,7 @@ class UdpConnection {
 public:
     UdpConnection( const std::string& name, const Send_Receive_Mode_Enum& mode, std::string const& addr, const int& port, const int& family = AF_UNSPEC );
     virtual ~UdpConnection();
-    UdpConnection( const UdpConnection& other ) = default;
+    UdpConnection( const UdpConnection& other );
 
     int enableSend();
     int enableReceive();

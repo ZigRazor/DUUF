@@ -51,8 +51,18 @@ UdpConnection::~UdpConnection() {
     }
 }
 
+UdpConnection::UdpConnection( const UdpConnection& other ) {
+    name = other.name;
+    udp_addr = other.udp_addr;
+    port = other.port;
+    family = other.family;
+    mode = other.mode;
+    receiver = new UdpReceiver(udp_addr, port, family);
+    sender = new UdpSender(udp_addr, port, family);
+}
+
 int UdpConnection::enableSend() {
-    if ( mode != SEND_RECEIVE || mode != SEND ) {
+    if ( mode != SEND_RECEIVE && mode != SEND ) {
         sender = new UdpSender(udp_addr, port, family);
         return 0;
     } else {
@@ -62,7 +72,7 @@ int UdpConnection::enableSend() {
 }
 
 int UdpConnection::enableReceive() {
-    if ( mode != SEND_RECEIVE || mode != RECEIVE ) {
+    if ( mode != SEND_RECEIVE && mode != RECEIVE ) {
         receiver = new UdpReceiver(udp_addr, port, family);
         return 0;
     } else {

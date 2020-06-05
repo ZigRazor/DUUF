@@ -64,27 +64,28 @@ UdpReceiver::UdpReceiver( std::string const& addr, const int& port, const int& f
         }
 
         //both address must have the right size
-        if ( a->ai_addrlen != sizeof(mreq.imr_multiaddr) || l_udp_addrinfo->ai_addrlen != sizeof(mreq.imr_address) ) {
+        if ( a == nullptr || a->ai_addrlen != sizeof(mreq.imr_multiaddr) || l_udp_addrinfo->ai_addrlen != sizeof(mreq.imr_address) ) {
             //ERROR
         }
+        if ( a != nullptr ) {
+            memcpy(&mreq.imr_multiaddr, a->ai_addr->sa_data, sizeof(mreq.imr_multiaddr));
+            memcpy(&mreq.imr_address, l_udp_addrinfo->ai_addr->sa_data, sizeof(mreq.imr_address));
+            mreq.imr_ifindex = 0; //no specific interface
 
-        memcpy(&mreq.imr_multiaddr, a->ai_addr->sa_data, sizeof(mreq.imr_multiaddr));
-        memcpy(&mreq.imr_address, l_udp_addrinfo->ai_addr->sa_data, sizeof(mreq.imr_address));
-        mreq.imr_ifindex = 0; //no specific interface
+            r = setsockopt(l_udp_socket, IPPROTO_IP, IP_ADD_MEMBERSHIP, &mreq, sizeof(mreq));
+            if ( r < 0 ) {
+                //int const e(errno);
+                //TODO Log Error
+            }
 
-        r = setsockopt(l_udp_socket, IPPROTO_IP, IP_ADD_MEMBERSHIP, &mreq, sizeof(mreq));
-        if ( r < 0 ) {
-            int const e(errno);
-            //TODO Log Error
-        }
-
-        // setup the multicast to 0 so we don't receive other's message
-        int multicast_all = 0;
-        r = setsockopt(l_udp_socket, IPPROTO_IP, IP_MULTICAST_ALL, &multicast_all, sizeof(multicast_all));
-        if ( r < 0 ) {
-            //Still work also without IP_MULTICAST_ALL set to 0
-            int const e(errno);
-            // TODO Log ERROR
+            // setup the multicast to 0 so we don't receive other's message
+            int multicast_all = 0;
+            r = setsockopt(l_udp_socket, IPPROTO_IP, IP_MULTICAST_ALL, &multicast_all, sizeof(multicast_all));
+            if ( r < 0 ) {
+                //Still work also without IP_MULTICAST_ALL set to 0
+                //int const e(errno);
+                // TODO Log ERROR
+            }
         }
     }
 
