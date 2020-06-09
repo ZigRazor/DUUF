@@ -51,15 +51,25 @@ UdpConnection::~UdpConnection() {
     }
 }
 
-UdpConnection::UdpConnection( const UdpConnection& other ) :
-        name(other.name), udp_addr(other.udp_addr), port(other.port), family(other.family), mode(other.mode) {
-    receiver = new UdpReceiver(udp_addr, port, family);
-    sender = new UdpSender(udp_addr, port, family);
-}
+//UdpConnection::UdpConnection( const UdpConnection& other ) :
+//        name(other.name), udp_addr(other.udp_addr), port(other.port), family(other.family), mode(other.mode) {
+//    receiver = new UdpReceiver(udp_addr, port, family);
+//    sender = new UdpSender(udp_addr, port, family);
+//}
 
 int UdpConnection::enableSend() {
     if ( mode != SEND_RECEIVE && mode != SEND ) {
         sender = new UdpSender(udp_addr, port, family);
+        if ( !sender ) {
+            return -2;
+        } else {
+            if ( mode == RECEIVE ) {
+                mode = SEND_RECEIVE;
+            } else if ( mode == NO_OPEN_MODE ) {
+                mode = SEND;
+            }
+
+        }
         return 0;
     } else {
         //Connection already in send mode
@@ -70,6 +80,16 @@ int UdpConnection::enableSend() {
 int UdpConnection::enableReceive() {
     if ( mode != SEND_RECEIVE && mode != RECEIVE ) {
         receiver = new UdpReceiver(udp_addr, port, family);
+        if ( !receiver ) {
+            return -2;
+        } else {
+            if ( mode == SEND ) {
+                mode = SEND_RECEIVE;
+            } else if ( mode == NO_OPEN_MODE ) {
+                mode = RECEIVE;
+            }
+
+        }
         return 0;
     } else {
         //Connection already in receive mode
@@ -95,6 +115,65 @@ int UdpConnection::getPort() const {
 
 const std::string& UdpConnection::getUdpAddr() const {
     return udp_addr;
+}
+
+long UdpConnection::send( const char* msg, size_t size ) const {
+    if ( mode != SEND_RECEIVE && mode != SEND ) { //Connection not in send mode
+        return -1;
+    } else {
+        return sender->send(msg, size);
+    }
+}
+
+long UdpConnection::recv( char* msg, size_t max_size ) const {
+    if ( mode != SEND_RECEIVE && mode != RECEIVE ) { //Connection not in receive mode
+        return -1;
+    } else {
+        return receiver->recv(msg, max_size);
+    }
+}
+
+int UdpConnection::disableSend() {
+    if ( mode != NO_OPEN_MODE && mode != RECEIVE ) {
+        if ( sender ) {
+            delete sender;
+        }
+        if ( mode == SEND ) {
+            mode = NO_OPEN_MODE;
+        } else if ( mode == SEND_RECEIVE ) {
+            mode = SEND;
+        }
+        return 0;
+    } else {
+        //send mode already disabled
+        return -1;
+    }
+}
+
+int UdpConnection::disableReceive() {
+    if ( mode != NO_OPEN_MODE && mode != SEND ) {
+        if ( receiver ) {
+            delete receiver;
+        }
+        if ( mode == RECEIVE ) {
+            mode = NO_OPEN_MODE;
+        } else if ( mode == SEND_RECEIVE ) {
+            mode = SEND;
+        }
+
+        return 0;
+    } else {
+        //receive mode already disabled
+        return -1;
+    }
+}
+
+long UdpConnection::timed_recv( char* msg, const size_t max_size, const int max_wait_ms ) const {
+    if ( mode != SEND_RECEIVE && mode != RECEIVE ) { //Connection not in receive mode
+        return -1;
+    } else {
+        return receiver->timed_recv(msg, max_size, max_wait_ms);
+    }
 }
 
 } /* namespace UDP */

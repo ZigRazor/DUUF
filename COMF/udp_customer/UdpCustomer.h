@@ -9,6 +9,7 @@
 #define COMF_UDP_CUSTOMER_UDPCUSTOMER_H_
 
 #include <map>
+#include <memory>
 #include "UdpConnection.h"
 
 namespace DUUF {
@@ -29,11 +30,17 @@ public:
     int closeConnection( const std::string& name );
     int enableConnectionSend( const std::string& name );
     int enableConnectionReceive( const std::string& name );
+    int disableConnectionSend( const std::string& name );
+    int disableConnectionReceive( const std::string& name );
+
+    long send( const char* msg, size_t size, const std::string& name ) const;
+    long recv( char* msg, size_t max_size, const std::string& name ) const;
+    long timed_recv( char* msg, size_t const max_size, int const max_wait_ms, const std::string& name ) const;
 private:
 
     bool isConnectionOpen( const std::string& name );
 
-    std::map<std::string, UdpConnection> connections;
+    std::map<std::string, std::shared_ptr<UdpConnection> > connections;
 };
 
 } /* namespace UDP */

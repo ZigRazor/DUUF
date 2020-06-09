@@ -8,6 +8,7 @@ include_directories(/usr/include/tirpc) #ADDED for rpc/types.h include (need lib
 
 
 add_subdirectory(udp_sender_receiver/tests)
+add_subdirectory(udp_customer/tests)
 add_subdirectory(message)
 #add_subdirectory(udp_message_queue)
 add_subdirectory(serialization)

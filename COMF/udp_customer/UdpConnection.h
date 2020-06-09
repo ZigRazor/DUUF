@@ -23,15 +23,21 @@ class UdpConnection {
 public:
     UdpConnection( const std::string& name, const Send_Receive_Mode_Enum& mode, std::string const& addr, const int& port, const int& family = AF_UNSPEC );
     virtual ~UdpConnection();
-    UdpConnection( const UdpConnection& other );
+    UdpConnection( const UdpConnection& other ) = delete;
 
     int enableSend();
     int enableReceive();
+    int disableSend();
+    int disableReceive();
     int getFamily() const;
     Send_Receive_Mode_E getMode() const;
     const std::string& getName() const;
     int getPort() const;
     const std::string& getUdpAddr() const;
+
+    long send( const char* msg, size_t size ) const;
+    long recv( char* msg, size_t max_size ) const;
+    long timed_recv( char* msg, size_t const max_size, int const max_wait_ms ) const;
 
 private:
 
