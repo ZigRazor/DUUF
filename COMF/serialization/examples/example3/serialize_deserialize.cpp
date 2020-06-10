@@ -14,8 +14,9 @@
 #include <cstdlib>
 #include <sstream>
 #include <string.h>
+
 #include "../../Serialization.h"
-#include "TestClass.h"
+#include "../example3/TestClass.h"
 
 using namespace std;
 

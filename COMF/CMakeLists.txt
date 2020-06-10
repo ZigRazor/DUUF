@@ -7,8 +7,8 @@ include_directories(serialization)
 include_directories(/usr/include/tirpc) #ADDED for rpc/types.h include (need libtirpc-devel installed)
 
 
-add_subdirectory(udp_sender_receiver/tests)
-add_subdirectory(udp_customer/tests)
+add_subdirectory(udp_sender_receiver/examples)
+add_subdirectory(udp_customer/examples)
 add_subdirectory(message)
 #add_subdirectory(udp_message_queue)
 add_subdirectory(serialization)

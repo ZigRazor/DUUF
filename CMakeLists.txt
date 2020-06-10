@@ -10,6 +10,8 @@ set(PROJECT_DIR ${PROJECT_SOURCE_DIR})
 set(COMF_DIR ${PROJECT_DIR}/COMF)
 
 add_subdirectory(COMF)
+add_subdirectory(TESTS EXCLUDE_FROM_ALL)
+
 #add the executable
 add_executable(MasterElection main.cpp)
 

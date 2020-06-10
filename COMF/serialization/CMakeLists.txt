@@ -1,4 +1,4 @@
-add_subdirectory(tests)
+add_subdirectory(examples)
 
 #specify the C++ Standard
 #set(CMAKE_CXX_STANDARD 11)

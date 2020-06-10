@@ -5,7 +5,8 @@
  *      Author: matteo
  */
 
-#include "TestClass.h"
+#include "../example3/TestClass.h"
+
 #include "../../Serialization.h"
 
 Test_Class::Test_Class() :
