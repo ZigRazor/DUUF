@@ -7,7 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     name: codacy-coverage-reporter
     steps:
-      - name: curl
+      - name : Export Api Token
+        run : export CODACY_PROJECT_TOKEN=fbe87704f5574e5082bbc579f11767a5 
+      - name : curl
         run : curl -Ls -o codacy-coverage-reporter "$(curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | contains("codacy-coverage-reporter-linux"))) | .[0].browser_download_url')"
       - name: chmod
         run : chmod +x codacy-coverage-reporter
