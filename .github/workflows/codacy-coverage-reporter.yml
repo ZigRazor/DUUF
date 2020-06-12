@@ -6,12 +6,23 @@ jobs:
   codacy-coverage-reporter:
     runs-on: ubuntu-latest
     name: codacy-coverage-reporter
-    steps:      
+    steps:
       - uses : actions/checkout@master
+      - name: Setup .NET Core # Required to execute ReportGenerator
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.300
+
+      - name: ReportGenerator
+        uses: danielpalme/ReportGenerator-GitHub-Action@4.6.1
+        with:
+          reports: 'build/Coverage/coverage.info' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+          targetdir: 'coveragereport' # REQUIRED # The directory where the generated report should be saved.
+          reporttypes: 'Cobertura' # The output formats and scope (separated by semicolon) Values: Badges, Clover, Cobertura, CsvSummary, Html, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlSummary, JsonSummary, Latex, LatexSummary, lcov, MHtml, PngChart, SonarQube, TeamCitySummary, TextSummary, Xml, XmlSummary
       - name : curl
         run : curl -Ls -o codacy-coverage-reporter "$(curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | contains("codacy-coverage-reporter-linux"))) | .[0].browser_download_url')"
       - name: chmod
         run : chmod +x codacy-coverage-reporter      
       - name : codacy-reporter
-        run : export CODACY_PROJECT_TOKEN=fbe87704f5574e5082bbc579f11767a5; ./codacy-coverage-reporter report --language C++ --force-language -r build/Coverage/coverage.info
+        run : export CODACY_PROJECT_TOKEN=fbe87704f5574e5082bbc579f11767a5; ls -altr; ./codacy-coverage-reporter report --language C++ --force-language -r build/Coverage/coverage.info
         
