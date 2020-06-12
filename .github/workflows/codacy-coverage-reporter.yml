@@ -7,9 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     name: codacy-coverage-reporter
     steps:
-      - uses: actions/checkout@master
-      - name: Run codacy-coverage-reporter
-        uses: codacy/codacy-coverage-reporter-action@master
-        with:
-          project-token: fbe87704f5574e5082bbc579f11767a5
-          coverage-reports: build/Coverage/coverage.info
+      - name: curl
+        run : curl -Ls -o codacy-coverage-reporter "$(curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | contains("codacy-coverage-reporter-linux"))) | .[0].browser_download_url')"
+      - name: chmod
+        run : chmod +x codacy-coverage-reporter
+      - name : codacy-reporter
+        run : ./codacy-coverage-reporter report --language C++ --force-language -r build/Coverage/coverage.info
+        
