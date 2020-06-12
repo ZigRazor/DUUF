@@ -9,8 +9,28 @@ project(DUUF)
 set(PROJECT_DIR ${PROJECT_SOURCE_DIR})
 set(COMF_DIR ${PROJECT_DIR}/COMF)
 
+option(CODE_COVERAGE "Enable coverage reporting" OFF)
+if(CODE_COVERAGE)
+	add_compile_options(
+		-O0  #no optimization
+		-g   #generate debug info
+		--coverage #set coverage flag
+		-fprofile-arcs
+		-ftest-coverage
+	)
+	link_libraries(
+		"gcov"
+		"-fprofile-arcs"
+		"--coverage"
+	)
+	
+endif(CODE_COVERAGE)	
+
 add_subdirectory(COMF)
-add_subdirectory(TESTS EXCLUDE_FROM_ALL)
+option(TEST_SET "Enable test compilation" OFF)
+if(TEST_SET)
+	add_subdirectory(TESTS)
+endif(TEST_SET)
 
 #add the executable
 add_executable(MasterElection main.cpp)
