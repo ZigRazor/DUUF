@@ -12,5 +12,5 @@ jobs:
       - name: chmod
         run : chmod +x codacy-coverage-reporter
       - name : codacy-reporter
-        run : export CODACY_PROJECT_TOKEN=fbe87704f5574e5082bbc579f11767a5; ls -altr; pwd; ./codacy-coverage-reporter report --language C++ --force-language -r ../build/Coverage/coverage.info
+        run : export CODACY_PROJECT_TOKEN=fbe87704f5574e5082bbc579f11767a5; ls -altr; pwd; ls -altr ..; ./codacy-coverage-reporter report --language C++ --force-language -r ../build/Coverage/coverage.info
         
