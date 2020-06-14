@@ -11,7 +11,6 @@ jobs:
       - name: Run codacy-coverage-reporter
         uses: codacy/codacy-coverage-reporter-action@master
         with:
-          language: c++
-          force-language: true 
+          args : --force-language
           project-token: fbe87704f5574e5082bbc579f11767a5
           coverage-reports: build/Coverage/coverage.info
