@@ -1,14 +1,17 @@
-name: Codecov
-on: [push]
+name: codecov-coverage-reporter
+
+on: ["push"]
+
 jobs:
-  run:
+  codacy-coverage-reporter:
     runs-on: ubuntu-latest
+    name: codecov-coverage-reporter
     steps:
-    - uses: actions/checkout@master
-    - name: Upload coverage to Codecov  
-      uses: ./
-      with:
-        #commenting out token because tokenless uploads are now supported
-        #token: ${{secrets.CODECOV_TOKEN}}
-        flags: unittest
-        name: codecov-1
+      - uses: actions/checkout@master 
+      - uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          file: ./coverage.xml # optional
+          flags: unittests # optional
+          name: codecov-umbrella # optional
+          fail_ci_if_error: true # optional (default = false)
