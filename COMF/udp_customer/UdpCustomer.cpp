@@ -15,7 +15,6 @@ UdpCustomer::UdpCustomer() {
 }
 
 UdpCustomer::~UdpCustomer() {
-    connections.clear();
 }
 
 int UdpCustomer::openConnection( const std::string& name, const Send_Receive_Mode_Enum& mode, const std::string& addr, const int& port, const int& family ) {
@@ -106,7 +105,7 @@ int UdpCustomer::disableConnectionSend( const std::string& name ) {
     } else {
         std::map<std::string, std::shared_ptr<UdpConnection>>::iterator connectionsIt = connections.find(name);
         if ( connectionsIt->second.get()->disableSend() == -1 ) {
-            //connection already open in receive mode
+            //connection not in send mode
             return -2;
         }
     }
@@ -120,7 +119,7 @@ int UdpCustomer::disableConnectionReceive( const std::string& name ) {
     } else {
         std::map<std::string, std::shared_ptr<UdpConnection>>::iterator connectionsIt = connections.find(name);
         if ( connectionsIt->second.get()->disableReceive() == -1 ) {
-            //connection already open in receive mode
+            //connection not in receive mode
             return -2;
         }
     }

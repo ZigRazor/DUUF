@@ -45,9 +45,11 @@ UdpConnection::UdpConnection( const std::string& name, const Send_Receive_Mode_E
 UdpConnection::~UdpConnection() {
     if ( receiver ) {
         delete receiver;
+        receiver = nullptr;
     }
     if ( sender ) {
         delete sender;
+        sender = nullptr;
     }
 }
 
@@ -137,6 +139,7 @@ int UdpConnection::disableSend() {
     if ( mode != NO_OPEN_MODE && mode != RECEIVE ) {
         if ( sender ) {
             delete sender;
+            sender = nullptr;
         }
         if ( mode == SEND ) {
             mode = NO_OPEN_MODE;
@@ -154,6 +157,7 @@ int UdpConnection::disableReceive() {
     if ( mode != NO_OPEN_MODE && mode != SEND ) {
         if ( receiver ) {
             delete receiver;
+            receiver = nullptr;
         }
         if ( mode == RECEIVE ) {
             mode = NO_OPEN_MODE;
