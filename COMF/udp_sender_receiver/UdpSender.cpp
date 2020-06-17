@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include "UdpSender.h"
+#include "COMFLogger.h"
 
 namespace DUUF {
 namespace COMF {
@@ -20,11 +21,15 @@ namespace UDP {
 
 UdpSender::UdpSender( std::string const& addr, const int& port, const int& family ) :
         UdpBase(addr, port, family) {
+    LOG4CXX_TRACE(COMF_Logger::getLogger(), "Created Sender");
     //std::cout << "creato client" << std::endl;
 }
 
 size_t UdpSender::send( const char* msg, size_t size ) const {
-    return sendto(l_udp_socket, msg, size, 0, l_udp_addrinfo->ai_addr, l_udp_addrinfo->ai_addrlen);
+    size_t bytes_sent = 0;
+    bytes_sent = sendto(l_udp_socket, msg, size, 0, l_udp_addrinfo->ai_addr, l_udp_addrinfo->ai_addrlen);
+    LOG4CXX_TRACE(COMF_Logger::getLogger(), bytes_sent << " bytes sent");
+    return bytes_sent;
 }
 
 }

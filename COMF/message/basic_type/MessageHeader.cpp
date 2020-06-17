@@ -19,9 +19,12 @@ namespace COMF {
 namespace MESSAGE {
 namespace BASICTYPE {
 
+unsigned long INVALID_MSG_ID = 0;
+
 MessageHeader::MessageHeader() :
         addr(""), usecTimestamp(std::chrono::microseconds(0)) {
     port = 0;
+    messageId = INVALID_MSG_ID;
     dataSize = 0;
 }
 
@@ -79,6 +82,14 @@ unsigned int MessageHeader::serialize( std::ostream& dest ) const {
     size_serialized += DUUF::COMF::Serialization::serialize(timestamp, dest);
     size_serialized += DUUF::COMF::Serialization::serialize(dataSize, dest);
     return size_serialized;
+}
+
+unsigned long MessageHeader::getMessageId() const {
+    return messageId;
+}
+
+void MessageHeader::setMessageId( unsigned long messageId ) {
+    this->messageId = messageId;
 }
 
 }

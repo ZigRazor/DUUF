@@ -23,6 +23,8 @@ namespace COMF {
 namespace MESSAGE {
 namespace BASICTYPE {
 
+extern unsigned long INVALID_MSG_ID;
+
 class MessageHeader: public DUUF::COMF::Serializable {
 public:
     MessageHeader();
@@ -40,10 +42,14 @@ public:
     int GetPort() const;
     void SetAddr( const std::string& addr );
     std::string GetAddr() const;
+    unsigned long getMessageId() const;
+    void setMessageId( unsigned long messageId );
+
 private:
     std::string addr;
     int port;
     std::chrono::microseconds usecTimestamp;
+    unsigned long messageId;
     unsigned int dataSize;
 
 };

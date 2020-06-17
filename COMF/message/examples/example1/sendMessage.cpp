@@ -34,6 +34,7 @@ int main( int argc, char** argv ) {
 
     message.GetHeader().SetPort(20000);
     message.GetHeader().SetAddr("127.0.0.1");
+    message.GetHeader().setMessageId(1);
     auto now = std::chrono::system_clock::now();
     auto now_us = std::chrono::time_point_cast<std::chrono::microseconds>(now);
     auto epoch = now_us.time_since_epoch();

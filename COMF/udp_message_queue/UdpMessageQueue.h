@@ -14,6 +14,10 @@
 #ifndef UDP_MESSAGE_QUEUE_H
 #define UDP_MESSAGE_QUEUE_H
 
+#include <queue>
+#include <list>
+#include "BaseMessage.h"
+
 namespace DUUF {
 namespace COMF {
 namespace UDP {
@@ -21,9 +25,18 @@ namespace UDP {
 class UdpMessageQueue {
 public:
     UdpMessageQueue();
-    UdpMessageQueue( const UdpMessageQueue& orig );
+    UdpMessageQueue( const UdpMessageQueue& orig ) = delete;
     virtual ~UdpMessageQueue();
+
+    DUUF::COMF::MESSAGE::BaseMessage front();
+    DUUF::COMF::MESSAGE::BaseMessage pop_front();
+    void pop();
+    void push_back( DUUF::COMF::MESSAGE::BaseMessage& message );
+    bool isEmpty();
+
 private:
+
+    std::queue<DUUF::COMF::MESSAGE::BaseMessage> messageQueue;
 
 };
 

@@ -20,10 +20,39 @@ namespace UDP {
 UdpMessageQueue::UdpMessageQueue() {
 }
 
-UdpMessageQueue::UdpMessageQueue( const UdpMessageQueue& orig ) {
+UdpMessageQueue::~UdpMessageQueue() {
 }
 
-UdpMessageQueue::~UdpMessageQueue() {
+DUUF::COMF::MESSAGE::BaseMessage UdpMessageQueue::front() {
+    if ( !isEmpty() ) {
+        return messageQueue.front();
+    } else {
+        return DUUF::COMF::MESSAGE::BaseMessage(); //TODO return Invlaid Message
+    }
+}
+
+DUUF::COMF::MESSAGE::BaseMessage UdpMessageQueue::pop_front() {
+    if ( !isEmpty() ) {
+        DUUF::COMF::MESSAGE::BaseMessage msg = messageQueue.front();
+        messageQueue.pop();
+        return msg;
+    } else {
+        return DUUF::COMF::MESSAGE::BaseMessage(); //TODO return Invlaid Message
+    }
+}
+
+void UdpMessageQueue::pop() {
+    if ( !isEmpty() ) {
+        messageQueue.pop();
+    }
+}
+
+void UdpMessageQueue::push_back( DUUF::COMF::MESSAGE::BaseMessage& message ) {
+    messageQueue.push(message);
+}
+
+bool UdpMessageQueue::isEmpty() {
+    return messageQueue.empty();
 }
 
 }

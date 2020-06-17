@@ -46,6 +46,7 @@ int main( int argc, char** argv ) {
     cout << "Message Received: " << endl;
     cout << "   port: " << b_message.GetHeader().GetPort() << endl;
     cout << "   addr: " << b_message.GetHeader().GetAddr() << endl;
+    cout << "   messageId: " << b_message.GetHeader().getMessageId() << endl;
     cout << "   time: " << b_message.GetHeader().GetUsecTimestamp().count() << endl;
     cout << "   dataSize: " << b_message.GetHeader().GetDataSize() << endl;
     cout << "   DATA : " << b_message.GetData() << endl;
