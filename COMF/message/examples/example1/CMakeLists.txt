@@ -1,0 +1,9 @@
+add_executable(message_test_0001_sendMessage sendMessage.cpp)
+add_executable(message_test_0001_receiveMessage receiveMessage.cpp)
+
+#target_include_directories(message_test_0001_sendMessage PUBLIC ${PROJECT_DIR}/udp_client_server)
+#target_include_directories(message_test_0001_receiveMessage PUBLIC ${PROJECT_DIR}/udp_client_server)
+
+target_link_libraries(message_test_0001_sendMessage "udp")
+target_link_libraries(message_test_0001_receiveMessage "udp")
+

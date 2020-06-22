@@ -1,0 +1,5 @@
+Project Dependecies
+GoogleTest (test)
+lcov (coverage report)
+log4cxx (library for log)
+

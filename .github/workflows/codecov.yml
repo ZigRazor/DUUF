@@ -1,0 +1,17 @@
+name: codecov-coverage-reporter
+
+on: ["push"]
+
+jobs:
+  codacy-coverage-reporter:
+    runs-on: ubuntu-latest
+    name: codecov-coverage-reporter
+    steps:
+      - uses: actions/checkout@master 
+      - uses: codecov/codecov-action@v1
+        with:
+          #token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          file: ./build/Coverage/coverage.info # optional
+          flags: unittests # optional
+          name: codecov-umbrella # optional
+          fail_ci_if_error: true # optional (default = false)
