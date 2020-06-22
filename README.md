@@ -4,7 +4,6 @@
 
 [![codecov](https://codecov.io/gh/ZigRazor/DUUF/branch/develop/graph/badge.svg)](https://codecov.io/gh/ZigRazor/DUUF)
 
-
 **Distributed Unified Utilities Framework**
 
 ## Project
