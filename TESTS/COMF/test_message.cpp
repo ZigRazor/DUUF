@@ -119,3 +119,44 @@ TEST(test_message, test4) {
     EXPECT_EQ(message.GetHeader(), messageDeserialized.GetHeader());
 
 }
+
+TEST(test_message, test5) {
+
+    DUUF::COMF::MESSAGE::BaseMessage message;
+
+    DUUF::COMF::MESSAGE::BASICTYPE::MessageHeader header;
+    header.SetAddr("127.0.0.1");
+    header.SetPort(10000);
+    header.SetUsecTimestampNow();
+    header.setMessageId(10);
+
+    char data[15] = "test_message_4";
+
+    message.SetHeader(header);
+    message.SetData(data, 15);
+
+    EXPECT_EQ(message.GetHeader().GetDataSize(), 15);
+    EXPECT_TRUE(message.GetData() != nullptr);
+
+    std::stringstream ss;
+
+    message.serialize(ss);
+
+    DUUF::COMF::MESSAGE::BaseMessage messageDeserialized;
+
+    messageDeserialized.deserialize(ss);
+    std::string data1 = message.GetData();
+    std::string data2 = messageDeserialized.GetData();
+    EXPECT_EQ(data1, data2);
+    EXPECT_EQ(message.GetHeader(), messageDeserialized.GetHeader());
+
+    ss.clear();
+
+    message.serialize(ss);
+    messageDeserialized.deserialize(ss);
+    std::string data3 = message.GetData();
+    std::string data4 = messageDeserialized.GetData();
+    EXPECT_EQ(data3, data4);
+    EXPECT_EQ(message.GetHeader(), messageDeserialized.GetHeader());
+
+}

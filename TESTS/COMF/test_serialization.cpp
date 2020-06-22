@@ -178,7 +178,7 @@ TEST(test_serialization, test_string) {
     EXPECT_EQ(n_result, n);
 }
 
-TEST(test_serialization, test_char_star) {
+TEST(test_serialization, test_char_star1) {
     char o[21] = "test_case_0001 char*";
     char o_result[21] = "";
     stringstream my_stream;
@@ -191,5 +191,46 @@ TEST(test_serialization, test_char_star) {
 
     EXPECT_EQ(size_deserialized, 21 + sizeof(unsigned int));
     EXPECT_TRUE(strncmp(o_result, o, 21) == 0);
+}
+
+TEST(test_serialization, test_char_star2) {
+    char o[21] = "test_case_0001 char*";
+    char o_result[20] = "";
+    stringstream my_stream;
+    unsigned int size_serialized = 0;
+    unsigned int size_deserialized = 0;
+
+    size_serialized = DUUF::COMF::Serialization::serialize(o, 21, my_stream);
+    EXPECT_EQ(size_serialized, 21 + sizeof(unsigned int));
+    size_deserialized = DUUF::COMF::Serialization::deserialize(my_stream, 20, o_result);
+
+    EXPECT_EQ(size_deserialized, 21 + sizeof(unsigned int));
+    EXPECT_TRUE(strncmp(o_result, o, 20) == 0);
+}
+
+TEST(test_serialization, test_sb2char) {
+    char o[21] = "test_case_0001 char*";
+    char buffer[256] = "";
+    stringstream my_stream;
+    unsigned int size_serialized = 0;
+    unsigned int size_deserialized = 0;
+
+    size_serialized = DUUF::COMF::Serialization::serialize(o, 21, my_stream);
+    EXPECT_EQ(size_serialized, 21 + sizeof(unsigned int));
+
+    int byteBuffered = DUUF::COMF::Serialization::streambufToCharBuf(my_stream, buffer, 256);
+
+    EXPECT_GE(byteBuffered, 0);
+
+    stringstream my_stream2;
+
+    int result = DUUF::COMF::Serialization::charBufToStreamBuf(buffer, my_stream2, byteBuffered);
+
+    EXPECT_EQ(result, 0);
+
+    byteBuffered = DUUF::COMF::Serialization::streambufToCharBuf(my_stream, buffer, 1);
+
+    EXPECT_EQ(byteBuffered, -1);
+
 }
 
