@@ -31,6 +31,8 @@ public:
     virtual unsigned int deserialize( std::istream& source ) override;
     virtual unsigned int serialize( std::ostream& dest ) const override;
 
+    bool operator==( const BaseMessage& bm ) const;
+
 private:
 
     BASICTYPE::MessageHeader header;

@@ -25,9 +25,10 @@ BaseMessage::BaseMessage() :
 }
 
 BaseMessage::BaseMessage( const BaseMessage& orig ) {
-    if ( data ) {
-        delete[] data;
-    }
+//    if ( data != nullptr ) {
+//        delete[] data;
+//    }
+    header = orig.header;
     data = new char[orig.header.GetDataSize()];
     memcpy(data, orig.data, orig.header.GetDataSize());
 }
@@ -76,6 +77,10 @@ unsigned int BaseMessage::serialize( std::ostream& dest ) const {
     byteSerialized += DUUF::COMF::Serialization::serialize(header, dest);
     byteSerialized += DUUF::COMF::Serialization::serialize(data, header.GetDataSize(), dest);
     return byteSerialized;
+}
+
+bool BaseMessage::operator==( const BaseMessage& bm ) const {
+    return header == bm.header && (memcmp(data, bm.data, header.GetDataSize()) == 0);
 }
 
 }

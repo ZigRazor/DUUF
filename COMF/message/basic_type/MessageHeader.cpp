@@ -43,6 +43,14 @@ void MessageHeader::SetUsecTimestamp( const std::chrono::microseconds& usecTimes
     this->usecTimestamp = usecTimestamp;
 }
 
+void MessageHeader::SetUsecTimestampNow() {
+    auto now = std::chrono::system_clock::now();
+    auto now_us = std::chrono::time_point_cast<std::chrono::microseconds>(now);
+    auto epoch = now_us.time_since_epoch();
+    std::chrono::microseconds usec = std::chrono::duration_cast<std::chrono::microseconds>(epoch);
+    this->usecTimestamp = usec;
+}
+
 std::chrono::microseconds MessageHeader::GetUsecTimestamp() const {
     return usecTimestamp;
 }
@@ -71,6 +79,7 @@ unsigned int MessageHeader::deserialize( std::istream& source ) {
     size_deserialized += DUUF::COMF::Serialization::deserialize(source, timestamp);
     usecTimestamp = std::chrono::microseconds(timestamp);
     size_deserialized += DUUF::COMF::Serialization::deserialize(source, dataSize);
+    size_deserialized += DUUF::COMF::Serialization::deserialize(source, messageId);
     return size_deserialized;
 }
 
@@ -81,6 +90,7 @@ unsigned int MessageHeader::serialize( std::ostream& dest ) const {
     size_serialized += DUUF::COMF::Serialization::serialize(port, dest);
     size_serialized += DUUF::COMF::Serialization::serialize(timestamp, dest);
     size_serialized += DUUF::COMF::Serialization::serialize(dataSize, dest);
+    size_serialized += DUUF::COMF::Serialization::serialize(messageId, dest);
     return size_serialized;
 }
 
@@ -90,6 +100,10 @@ unsigned long MessageHeader::getMessageId() const {
 
 void MessageHeader::setMessageId( unsigned long messageId ) {
     this->messageId = messageId;
+}
+
+bool MessageHeader::operator==( const MessageHeader& mh ) const {
+    return addr == mh.addr && port == mh.port && usecTimestamp == mh.usecTimestamp && messageId == mh.messageId && dataSize == mh.dataSize;
 }
 
 }

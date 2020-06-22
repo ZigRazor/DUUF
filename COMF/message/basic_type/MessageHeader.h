@@ -37,6 +37,7 @@ public:
     void SetDataSize( unsigned int dataSize );
     unsigned int GetDataSize() const;
     void SetUsecTimestamp( const std::chrono::microseconds& usecTimestamp );
+    void SetUsecTimestampNow();
     std::chrono::microseconds GetUsecTimestamp() const;
     void SetPort( int port );
     int GetPort() const;
@@ -44,6 +45,8 @@ public:
     std::string GetAddr() const;
     unsigned long getMessageId() const;
     void setMessageId( unsigned long messageId );
+
+    bool operator==( const MessageHeader& mh ) const;
 
 private:
     std::string addr;
