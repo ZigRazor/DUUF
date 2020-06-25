@@ -27,4 +27,12 @@ add_library(udp SHARED
 	COMFLogger.cpp
 	)
 	
+add_library(tcp SHARED
+	tcp_server_client/TcpBase.cpp
+	tcp_server_client/TcpClient.cpp
+	tcp_server_client/TcpServer.cpp
+	COMFLogger.cpp
+	)
+	
 target_link_libraries(udp "log4cxx")
+target_link_libraries(tcp "log4cxx")

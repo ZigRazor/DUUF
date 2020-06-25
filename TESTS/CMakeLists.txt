@@ -17,11 +17,14 @@ add_executable( test_suite test_main.cpp
 	COMF/test_message.cpp
 	COMF/test_udpmessagequeue.cpp
 	COMF/test_serialization.cpp
+	COMF/test_tcp_server.cpp
+	COMF/test_tcp_client.cpp
 )
 target_link_libraries( test_suite 
-"libgtest.a" 
-"libgtest_main.a"
-"pthread"
-"udp"
+	"libgtest.a" 
+	"libgtest_main.a"
+	"pthread"
+	"udp"
+	"tcp"
 )
 
