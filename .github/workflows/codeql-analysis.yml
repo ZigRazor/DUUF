@@ -47,6 +47,13 @@ jobs:
     #    uses a compiled language
 
     - run: |
+        git clone http://gitbox.apache.org/repos/asf/logging-log4cxx.git
+        cd apache-log4cxx-0.10.0
+        ./configure
+        make
+        make check
+        sudo make install
+        cd 
         cd build
         cmake ..
         make 
