@@ -1,0 +1,2 @@
+tasks:
+  - init: sudo apt-get install apr
